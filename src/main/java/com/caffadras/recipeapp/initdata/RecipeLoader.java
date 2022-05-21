@@ -34,7 +34,6 @@ public class RecipeLoader implements ApplicationListener<ContextRefreshedEvent> 
     List<Recipe> getRecipes(){
         List<Recipe> recipes = new ArrayList<>();
 
-
         UnitOfMeasure tablespoonUom = unpackOptional(unitOfMeasureRepository.findByUom("Tablespoon"));
         UnitOfMeasure teaspoonUom = unpackOptional(unitOfMeasureRepository.findByUom("Teaspoon"));
         UnitOfMeasure dashUom = unpackOptional(unitOfMeasureRepository.findByUom("Dash"));
@@ -64,17 +63,16 @@ public class RecipeLoader implements ApplicationListener<ContextRefreshedEvent> 
                 "The simplest version of guacamole is just mashed avocados with salt. Don't let the lack of availability of other ingredients stop you from making guacamole.\n" +
                 "To extend a limited supply of avocados, add either sour cream or cottage cheese to your guacamole dip. Purists may be horrified, but so what? It tastes great.");
 
-        guacamoleNotes.setRecipe(guacamoleRecipe);
         guacamoleRecipe.setNotes(guacamoleNotes);
 
-        guacamoleRecipe.getIngredients().add(new Ingredient("Ripe avocados", 2.0, eachUom, guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("Kosher salt", 0.5, teaspoonUom, guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("Fresh lime juice or lemon juice", 2.0, tablespoonUom, guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("Minced red onion or thinly sliced green onion", 2.0, tablespoonUom, guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("Serrano chilies, stems and seeds removed, minced", 2.0, eachUom, guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("Cilantro", 2.0, tablespoonUom, guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("Freshly grated black pepper", 2.0, dashUom, guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("Ripe tomato, seeds and pulp removed, chopped", 0.5, eachUom, guacamoleRecipe));
+        guacamoleRecipe.addIngredient((new Ingredient("Ripe avocados", 2.0, eachUom)));
+        guacamoleRecipe.addIngredient((new Ingredient("Kosher salt", 0.5, teaspoonUom)));
+        guacamoleRecipe.addIngredient((new Ingredient("Fresh lime juice or lemon juice", 2.0, tablespoonUom)));
+        guacamoleRecipe.addIngredient((new Ingredient("Minced red onion or thinly sliced green onion", 2.0, tablespoonUom)));
+        guacamoleRecipe.addIngredient((new Ingredient("Serrano chilies, stems and seeds removed, minced", 2.0, eachUom)));
+        guacamoleRecipe.addIngredient((new Ingredient("Cilantro", 2.0, tablespoonUom)));
+        guacamoleRecipe.addIngredient((new Ingredient("Freshly grated black pepper", 2.0, dashUom)));
+        guacamoleRecipe.addIngredient((new Ingredient("Ripe tomato, seeds and pulp removed, chopped", 0.5, eachUom)));
 
 
         guacamoleRecipe.getCategories().add(americanCategory);
