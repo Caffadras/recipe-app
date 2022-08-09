@@ -26,11 +26,13 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Description</th>
+                                <th>View</th>
                             </tr>
                             </thead>
-                            <tr th:each="recipe : ${recipes}">
+                            <tr th:each="recipe : ${recipes}" style="transform: rotate(0);" >
                                 <td th:text="${recipe.getId()}">ID</td>
-                                <td th:text="${recipe.getDescription()}">Description</td>
+                                <td th:text="${recipe.getDescription()}" >Description</td>
+                                <td><a style="color:white" th:href="@{/recipe/{id}(id=${recipe.getId()})}" class="stretched-link">View</a></td>
                             </tr>
                         </table>
                     </div>

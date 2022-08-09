@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <title>Title</title>
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card text-white bg-info">
+                <div class="card-header">
+                    <h1 th:text="${recipe.getDescription()}">Recipes</h1>
+                </div>
+                <div class="card-body">
+                    <div class = container-fluid>
+                        <div class="table-responsive">
+                            <table class="table text-white table-hover">
+                                <tr>
+                                    <td><h5>Categories:</h5></td>
+                                    <td>
+                                        <ul th:each="category : ${recipe.getCategories()}">
+                                            <li th:text="${category.getDescription()}">An ingredient</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Difficulty:</h5></td>
+                                    <td th:text="${recipe.getDifficulty()}"><h5>Difficulty</h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Preparation Time:</h5></td>
+                                    <td th:text="${recipe.getPrepTime()}"><h5>Preparation Time</h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5>CookTime:</h5></td>
+                                    <td th:text="${recipe.getCookTime()}"><h5>Cook Time</h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5>URL:</h5></td>
+                                    <td th:text="${recipe.getUrl()}"><h5>URL</h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Servings:</h5></td>
+                                    <td th:text="${recipe.getServings()}"><h5>Servings</h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Source:</h5></td>
+                                    <td th:text="${recipe.getSource()}"><h5>Source</h5></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card text-white bg-info">
+                <div class="card-header">
+                    <h3>Ingredients</h3>
+                </div>
+                <div class="card-body">
+                    <ul th:each="ingrigient : ${recipe.getIngredients()}">
+                        <li th:text="${ingrigient.getDescription()}">1 spoon of shit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card text-white bg-info">
+                <div class="card-header">
+                    <h3>Notes</h3>
+                </div>
+                <div class="card-body" th:text="${recipe.getNotes().getRecipeNotes()}">Notes</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
