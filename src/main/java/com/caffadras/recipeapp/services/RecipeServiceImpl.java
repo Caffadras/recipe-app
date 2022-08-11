@@ -27,4 +27,9 @@ public class RecipeServiceImpl implements RecipeService{
         return recipeRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
+    @Override
+    public Recipe save(Recipe recipe) {
+        return recipeRepository.save(recipe);
+    }
+
 }
