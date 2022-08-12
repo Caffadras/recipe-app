@@ -40,7 +40,7 @@ public class RecipeController {
         return "redirect:/index";
     }
 
-    @GetMapping("recipe/update/{id}")
+    @GetMapping("recipe/{id}/update")
     public String requestUpdateForm(@PathVariable String id, Model model){
         log.debug("Request to update recipe with id: " + id);
         Recipe recipeToUpdate = recipeService.findById(Long.valueOf(id));
