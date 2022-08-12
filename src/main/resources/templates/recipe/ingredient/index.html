@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <title>Title</title>
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card text-white bg-info">
+                <div class="card-header">
+                    <h1>Recipes</h1>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table text-white table-hover">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <th>ID</th>
+                                <th>Description</th>
+                                <th>View</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tr th:each="ingredient : ${recipe.getIngredients()}">
+                                <td th:text="${ingredient.getId()}">ID</td>
+                                <td th:text="${ingredient.getAmount()} + ' '
+                                    + ${ingredient.getUnitOfMeasure().getUom()} + ' '
+                                    + ${ingredient.getDescription()}" >Description</td>
+                                <td><a style="color:white" th:href="@{/recipe/{id}(id=${recipe.getId()})}" >View</a></td>
+                                <td><a style="color:white" th:href="@{/recipe/{id}/update(id=${recipe.getId()})}" >Update</a></td>
+                                <td><a style="color:white" th:href="@{/recipe/{id}/delete(id=${recipe.getId()})}" >Delete</a></td>
+                            </tr>
+                        </table>
+                    </div>
+<!--                    <a class="btn btn-outline-light" th:href="@{/recipe/new}" >New</a>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
