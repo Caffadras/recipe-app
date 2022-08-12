@@ -13,7 +13,10 @@
 <body>
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-1 offset-md-2">
+            <a class="btn btn-lg btn-info" th:href="@{/index}" >Back</a>
+        </div>
+        <div class="col-md-6">
             <div class="card text-white bg-info">
                 <div class="card-header">
                     <h1 th:text="${recipe.getDescription()}">Recipes</h1>
@@ -72,7 +75,7 @@
                 </div>
                 <div class="card-body">
                     <ul th:each="ingrigient : ${recipe.getIngredients()}">
-                        <li th:text="${ingrigient.getDescription()}">1 spoon of shit</li>
+                        <li th:text="${ingrigient.getDescription()}">1 spoon of xxxx</li>
                     </ul>
                 </div>
             </div>
