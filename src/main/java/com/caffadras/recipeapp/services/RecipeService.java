@@ -10,4 +10,6 @@ public interface RecipeService {
     Recipe findById(Long id);
 
     Recipe save(Recipe recipe);
+
+    void deleteById(Long id);
 }
