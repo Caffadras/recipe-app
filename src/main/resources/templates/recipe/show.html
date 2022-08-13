@@ -75,8 +75,10 @@
                 </div>
                 <div class="card-body">
                     <ul th:each="ingrigient : ${recipe.getIngredients()}">
-                        <li th:text="${ingrigient.getDescription()}">1 spoon of xxxx</li>
+                        <li th:text="${ingrigient?.getDescription()}">1 spoon of xxxx</li>
                     </ul>
+                    <a class="btn btn-outline-light" th:href="@{/recipe/{recipeId}/ingredient/index
+                                (recipeId=${recipe.getId()})}" >See More</a>
                 </div>
             </div>
         </div>
@@ -90,7 +92,7 @@
                 <div class="card-header">
                     <h3>Notes</h3>
                 </div>
-                <div class="card-body" th:text="${recipe.getNotes().getRecipeNotes()}">Notes</div>
+                <div class="card-body" th:text="${recipe.getNotes()?.getRecipeNotes()}">Notes</div>
             </div>
         </div>
     </div>

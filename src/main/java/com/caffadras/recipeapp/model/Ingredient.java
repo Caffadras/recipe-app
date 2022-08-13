@@ -28,4 +28,23 @@ public class Ingredient {
         this.amount = amount;
         this.unitOfMeasure = unitOfMeasure;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Ingredient other = (Ingredient) obj;
+        return id != null && id.equals(other.getId());
+    }
+
+    //fixme: hashCode relies only on id value.
+    // Any ingredient created with no args constructor (i.e id is null) will fail to be distinct.
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }

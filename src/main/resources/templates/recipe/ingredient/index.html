@@ -13,10 +13,13 @@
 <body>
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-1 offset-md-2">
+            <a class="btn btn-lg btn-info" th:href="@{/index}" >Back</a>
+        </div>
+        <div class="col-md-6">
             <div class="card text-white bg-info">
                 <div class="card-header">
-                    <h1>Recipes</h1>
+                    <h1>Ingredients</h1>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -25,7 +28,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Description</th>
-                                <th>View</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -33,15 +35,17 @@
                             <tr th:each="ingredient : ${recipe.getIngredients()}">
                                 <td th:text="${ingredient.getId()}">ID</td>
                                 <td th:text="${ingredient.getAmount()} + ' '
-                                    + ${ingredient.getUnitOfMeasure().getUom()} + ' '
+                                    + ${ingredient.getUnitOfMeasure()?.getUom()} + ' '
                                     + ${ingredient.getDescription()}" >Description</td>
-                                <td><a style="color:white" th:href="@{/recipe/{id}(id=${recipe.getId()})}" >View</a></td>
-                                <td><a style="color:white" th:href="@{/recipe/{id}/update(id=${recipe.getId()})}" >Update</a></td>
-                                <td><a style="color:white" th:href="@{/recipe/{id}/delete(id=${recipe.getId()})}" >Delete</a></td>
+                                <td><a style="color:white" th:href="@{/recipe/{recipeId}/ingredient/{ingredientId}/update
+                                (recipeId=${recipe.getId()},ingredientId = ${ingredient.getId()})}" >Update</a></td>
+                                <td><a style="color:white" th:href="@{/recipe/{recipeId}/ingredient/{ingredientId}/delete
+                                (recipeId=${recipe.getId()},ingredientId = ${ingredient.getId()})}" >Delete</a></td>
                             </tr>
                         </table>
                     </div>
-<!--                    <a class="btn btn-outline-light" th:href="@{/recipe/new}" >New</a>-->
+                    <a class="btn btn-outline-light" th:href="@{/recipe/{recipeId}/ingredient/new
+                                (recipeId=${recipe.getId()})}" >New</a>
 
                 </div>
             </div>
