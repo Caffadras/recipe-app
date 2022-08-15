@@ -74,7 +74,8 @@
                     <h3>Image</h3>
                 </div>
                 <div class="card-body">
-                    <img src="../../static/images/no-image.png" th:src="@{/images/no-image.png}">
+                    <img src="../../static/images/no-image.png"
+                         th:src="@{/recipe/{recipeId}/image(recipeId= ${recipe.getId()})}">
                     <a class="btn btn-outline-light" th:href="@{/recipe/{recipeId}/update/image
                                 (recipeId=${recipe.getId()})}" >Change Image</a>
                 </div>
