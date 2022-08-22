@@ -2,6 +2,7 @@ package com.caffadras.recipeapp.services;
 
 import com.caffadras.recipeapp.model.Recipe;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,9 +19,9 @@ public class ImageServiceImpl implements ImageService{
     }
 
     @Override
-    public void save(Recipe recipe, MultipartFile file) {
+    public void save(@NonNull Recipe recipe, MultipartFile file) {
         log.debug("Request to save file with size: " + file.getSize() + " bytes");
-        //todo NPE
+
         try{
             Byte[] image = new Byte[(int)file.getSize()];
             int i=0;

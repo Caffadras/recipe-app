@@ -1,8 +1,10 @@
 package com.caffadras.recipeapp.services;
 
+import com.caffadras.recipeapp.exceptions.NotFoundException;
 import com.caffadras.recipeapp.model.Ingredient;
 import com.caffadras.recipeapp.model.Recipe;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -18,17 +20,15 @@ public class IngredientServiceImpl implements IngredientService{
     }
 
     @Override
-    public Ingredient findById(Recipe recipe, Long id) {
-        //todo: NPE
+    public Ingredient findById(@NonNull Recipe recipe, @NonNull  Long id) {
         return recipe.getIngredients().stream()
                 .filter(ingredient -> Objects.equals(ingredient.getId(), id))
                 .findFirst()
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(() -> new NotFoundException("Ingredient not found! ID: " + id));
     }
 
     @Override
-    public Ingredient save(Recipe recipe, Ingredient ingredient) {
-        //todo: NPE
+    public Ingredient save(@NonNull Recipe recipe, @NonNull Ingredient ingredient) {
         if(recipe.getIngredients().remove(ingredient)){
             log.debug("Updated ingredient with id: "+ ingredient.getId()
                     + " (Description: " + ingredient.getDescription() + ")");
@@ -42,16 +42,14 @@ public class IngredientServiceImpl implements IngredientService{
     }
 
     @Override
-    public void deleteById(Recipe recipe, Long ingredientId) {
-        //todo: NPE
+    public void deleteById(@NonNull Recipe recipe, @NonNull Long ingredientId) {
         Ingredient ingredient = findById(recipe, ingredientId);
         if(recipe.getIngredients().remove(ingredient)){
             ingredient.setRecipe(null);
             log.debug("Deleted ingredient with id: "+ ingredient.getId()
                     + " (Description: " + ingredient.getDescription() + ")");
         } else{
-            log.warn("Deleting an non-existing ingredient with id:" + ingredient.getId()
-                    + " (Description: " + ingredient.getDescription() + ")");
+            throw new NotFoundException("Ingredient not found! ID: " + ingredientId);
         }
         recipeService.save(recipe);
     }

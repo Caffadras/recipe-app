@@ -1,5 +1,6 @@
 package com.caffadras.recipeapp.services;
 
+import com.caffadras.recipeapp.exceptions.NotFoundException;
 import com.caffadras.recipeapp.model.Ingredient;
 import com.caffadras.recipeapp.model.Recipe;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +42,7 @@ class IngredientServiceImplTest {
         Ingredient returnedIngredient = ingredientService.findById(expectedRecipe, expectedIngredient.getId());
 
         assertEquals(expectedIngredient.getId(), returnedIngredient.getId());
-        assertThrows(RuntimeException.class, () -> ingredientService.findById(expectedRecipe, -1L));
+        assertThrows(NotFoundException.class, () -> ingredientService.findById(expectedRecipe, -1L));
         assertThrows(NullPointerException.class, () -> ingredientService.findById(null, expectedIngredient.getId()));
     }
 
@@ -59,6 +60,8 @@ class IngredientServiceImplTest {
         verify(recipeService, times(1)).save(expectedRecipe);
     }
 
+
+
     @Test
     void deleteById() {
         ingredientService.deleteById(expectedRecipe, expectedIngredient.getId());
@@ -66,5 +69,11 @@ class IngredientServiceImplTest {
         assertEquals(0, expectedRecipe.getIngredients().size());
         assertNull(expectedIngredient.getRecipe());
         verify(recipeService, times(1)).save(expectedRecipe);
+    }
+
+    @Test
+    void deleteByIdFail() {
+        assertThrows(NotFoundException.class, () ->
+                ingredientService.deleteById(expectedRecipe, -1L));
     }
 }
