@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,14 +17,33 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
+    @NotEmpty
+    @NotNull
+    @Size(min = 3, max = 255)
     private String description;
+
+    @NotNull
+    @Min(1)
+    @Max(999)
     private Integer prepTime;
+
+    @NotNull
+    @Min(1)
+    @Max(999)
     private Integer cookTime;
+
+    @NotNull
+    @Min(1)
+    @Max(99)
     private Integer servings;
+
     private String source;
+
+
     private String url;
+
     @Lob
+    @NotEmpty
     private String directions;
 
     @Lob

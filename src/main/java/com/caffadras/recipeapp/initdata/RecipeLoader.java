@@ -44,7 +44,7 @@ public class RecipeLoader implements ApplicationListener<ContextRefreshedEvent> 
         Recipe guacamoleRecipe = new Recipe();
         guacamoleRecipe.setDescription("A perfect guacamole");
         guacamoleRecipe.setPrepTime(10);
-        guacamoleRecipe.setCookTime(0);
+        guacamoleRecipe.setCookTime(1);
         guacamoleRecipe.setServings(1);
         guacamoleRecipe.setDifficulty(Difficulty.EASY);
         guacamoleRecipe.setDirections("1 Cut avocado, remove flesh: Cut the avocados in half. Remove seed. Score the inside of the avocado with a blunt knife and scoop out the flesh with a spoon" +

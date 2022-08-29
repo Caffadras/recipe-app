@@ -5,10 +5,14 @@ import com.caffadras.recipeapp.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 @Slf4j
@@ -34,8 +38,18 @@ public class RecipeController {
     }
 
     @PostMapping("/recipe/new")
-    public String saveRecipe(@ModelAttribute Recipe recipe){
+    public String saveRecipe(@Valid @ModelAttribute("recipe") Recipe recipe, BindingResult bindingResult){
         log.debug("Request to save recipe with id: " + recipe.getId()+ " (" + recipe.getDescription() + ")");
+        if (bindingResult.hasErrors()){
+            StringBuilder errorString = new StringBuilder("Recipe has errors: ");
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                errorString.append("\n").append(error.toString());
+            }
+            log.warn(errorString.toString());
+
+            return "recipe/form";
+        }
+
         recipeService.save(recipe);
         return "redirect:/index";
     }

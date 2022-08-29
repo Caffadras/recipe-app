@@ -78,7 +78,15 @@ class RecipeControllerTest {
 
     @Test
     void save() throws Exception{
-        mockMvc.perform(post("/recipe/new"))
+        mockMvc.perform(post("/recipe/new")
+                        .param("description", "Test")
+                        .param("prepTime", "2")
+                        .param("cookTime", "2")
+                        .param("servings", "2")
+                        .param("source", "source")
+                        .param("url", "url")
+                        .param("directions", "directions")
+                )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/index"));
     }
